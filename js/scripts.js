@@ -22,12 +22,18 @@ function addToCarritoItem(e){
 
 function addItemCarrito(newItem){
 
-    const alert = document.querySelector(`.alert`)
-
-    setTimeout(function(){
-        alert.classList.add(`hide`)
-    },2000)
-    alert.classList.remove(`hide`)
+    Toastify({
+        text: "Añadido con exito",
+        duration: 1500,
+        close: true,
+        gravity: "top", 
+        position: "center", 
+        stopOnFocus: true,
+        style: {
+            background: "black", 
+        },
+        onClick: function(){}
+    }).showToast();
 
     const InputElemento = tbody.getElementsByClassName(`input__elemento`)
     for(let i = 0; i < carrito.length ; i++ ){
@@ -100,15 +106,18 @@ function removeItemCarrito(e) {
         }
     }
 
-    const alert = document.querySelector(`.remove`)
-
-    setTimeout(function(){
-        alert.classList.add(`remove`)
-    },2000)
-    alert.classList.remove(`remove`)
-
-    tr.remove()
-    CarritoTotal()
+    Toastify({
+        text: "Removido con exito",
+        duration: 1500,
+        close: true,
+        gravity: "top", 
+        position: "center", 
+        stopOnFocus: true,
+        style: {
+            background: "black", 
+        },
+        onClick: function(){}
+    }).showToast();
     
 }
 
