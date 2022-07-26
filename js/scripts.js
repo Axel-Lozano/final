@@ -118,6 +118,9 @@ function removeItemCarrito(e) {
         },
         onClick: function(){}
     }).showToast();
+
+    tr.remove()
+    CarritoTotal()
     
 }
 
