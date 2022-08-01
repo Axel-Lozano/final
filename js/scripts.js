@@ -149,15 +149,16 @@ window.onload = function(){
     }
 }
 
-function obtenerInfo(){
-    fetch("https://62e85f8c249bb1284eadb91e.mockapi.io/api/articles")
-    .then((response) => {
-        console.log(response)
-        return response.json();
-    })
-    .then((data) => {
-        console.log(data)
-    })
+async function obtenerInfo(){
+    let response
+    let data
+    try {
+        response = await fetch("https://62e85f8c249bb1284eadb91e.mockapi.io/api/articles")
+        data = await response.json()
+    } catch (error) {
+        console.log(error)
+    }
+    console.log(data)
 }
 
 obtenerInfo()
