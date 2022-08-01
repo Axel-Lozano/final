@@ -30,7 +30,7 @@ function addItemCarrito(newItem){
         position: "center", 
         stopOnFocus: true,
         style: {
-            background: "black", 
+            background: "blue", 
         },
         onClick: function(){}
     }).showToast();
@@ -114,7 +114,7 @@ function removeItemCarrito(e) {
         position: "center", 
         stopOnFocus: true,
         style: {
-            background: "black", 
+            background: "blue", 
         },
         onClick: function(){}
     }).showToast();
@@ -148,3 +148,16 @@ window.onload = function(){
         renderCarrito()
     }
 }
+
+function obtenerInfo(){
+    fetch("https://62e85f8c249bb1284eadb91e.mockapi.io/api/articles")
+    .then((response) => {
+        console.log(response)
+        return response.json();
+    })
+    .then((data) => {
+        console.log(data)
+    })
+}
+
+obtenerInfo()
