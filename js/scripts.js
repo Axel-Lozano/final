@@ -1,5 +1,5 @@
 const Clickbutton = document.querySelectorAll(`.button`);
-const tbody =document.querySelector(`.tbody`)
+const tbody =document.querySelector(`.tbody`);
 let carrito = [];
 
 function addToCarritoItem(e){
@@ -16,7 +16,7 @@ function addToCarritoItem(e){
         cantidad: 1
     }
 
-    addItemCarrito(newItem)
+    addItemCarrito(newItem);
 }
 
 
@@ -39,22 +39,22 @@ function addItemCarrito(newItem){
     for(let i = 0; i < carrito.length ; i++ ){
         if(carrito[i].title.trim() === newItem.title.trim()){
             carrito[i].cantidad ++;
-            const inputValue = InputElemento[i]
-            inputValue.value++
-            CarritoTotal()
+            const inputValue = InputElemento[i];
+            inputValue.value++;
+            CarritoTotal();
             return null;
         }
     }
-    carrito.push(newItem)
-    renderCarrito()
-    CarritoTotal()
+    carrito.push(newItem);
+    renderCarrito();
+    CarritoTotal();
 }
 
 function renderCarrito() {
-    tbody.innerHTML = ``
+    tbody.innerHTML = ``;
     carrito.map(item => {
-        const tr = document.createElement(`tr`)
-        tr.classList.add(`ItemCarrito`)
+        const tr = document.createElement(`tr`);
+        tr.classList.add(`ItemCarrito`);
         const Content = `
         <tr>
             <th scope="row">1</th>
@@ -69,30 +69,30 @@ function renderCarrito() {
             </td>
         </tr>
         `
-        tr.innerHTML = Content
-        tbody.append(tr)
+        tr.innerHTML = Content;
+        tbody.append(tr);
 
-        tr.querySelector(`.delete`).addEventListener(`click`, removeItemCarrito)
-        tr.querySelector(".input__elemento").addEventListener(`change` , sumaCantidad)
+        tr.querySelector(`.delete`).addEventListener(`click`, removeItemCarrito);
+        tr.querySelector(".input__elemento").addEventListener(`change` , sumaCantidad);
     })
 
-    CarritoTotal()
+    CarritoTotal();
 }
 
 Clickbutton.forEach(btn => {
-    btn.addEventListener(`click`, addToCarritoItem)
+    btn.addEventListener(`click`, addToCarritoItem);
 })
 
 function CarritoTotal(){
     let Total = 0;
-    const itemCartTotal = document.querySelector(`.itemCartTotal`)
+    const itemCartTotal = document.querySelector(`.itemCartTotal`);
     carrito.forEach((item) => {
-        const precio = Number (item.precio.replace("$", ``))
-        Total = Total + precio*item.cantidad
+        const precio = Number (item.precio.replace("$", ``));
+        Total = Total + precio*item.cantidad;
     })
 
-    itemCartTotal.innerHTML = `Total $${Total}`
-    addLocalStorage()
+    itemCartTotal.innerHTML = `Total $${Total}`;
+    addLocalStorage();
 }
 
 function removeItemCarrito(e) {
@@ -102,7 +102,7 @@ function removeItemCarrito(e) {
     for(let i = 0; i < carrito.length ; i++){
 
         if(carrito[i].title.trim() === title.trim()){
-            carrito.splice(i, 1)
+            carrito.splice(i, 1);
         }
     }
 
@@ -119,46 +119,46 @@ function removeItemCarrito(e) {
         onClick: function(){}
     }).showToast();
 
-    tr.remove()
-    CarritoTotal()
+    tr.remove();
+    CarritoTotal();
     
 }
 
 function sumaCantidad(e){
-    const sumaInput = e.target
-    const tr = sumaInput.closest(".ItemCarrito")
-    const title = tr.querySelector(`.title`).textContent
+    const sumaInput = e.target;
+    const tr = sumaInput.closest(".ItemCarrito");
+    const title = tr.querySelector(`.title`).textContent;
     carrito.forEach(item => {
         if(item.title.trim() === title){
-            sumaInput.value < 1 ? (sumaInput.value = 1) : sumaInput.value
-            item.cantidad = sumaInput.value
-            CarritoTotal()
+            sumaInput.value < 1 ? (sumaInput.value = 1) : sumaInput.value;
+            item.cantidad = sumaInput.value;
+            CarritoTotal();
         }
     })
 }
 
 function addLocalStorage(){
-    localStorage.setItem(`carrito`, JSON.stringify(carrito))
+    localStorage.setItem(`carrito`, JSON.stringify(carrito));
 }
 
 window.onload = function(){
-    const storage = JSON.parse(localStorage.getItem(`carrito`))
+    const storage = JSON.parse(localStorage.getItem(`carrito`));
     if(storage){
-        carrito = storage
-        renderCarrito()
+        carrito = storage;
+        renderCarrito();
     }
 }
 
 async function obtenerInfo(){
-    let response
-    let data
+    let response;
+    let data;
     try {
-        response = await fetch("https://62e85f8c249bb1284eadb91e.mockapi.io/api/articles")
-        data = await response.json()
+        response = await fetch("https://62e85f8c249bb1284eadb91e.mockapi.io/api/articles");
+        data = await response.json();
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
-    console.log(data)
+    console.log(data);
 }
 
-obtenerInfo()
+obtenerInfo();
